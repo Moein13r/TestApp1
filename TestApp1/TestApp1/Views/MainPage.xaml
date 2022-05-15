@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestApp1.Views.MainPage"
+             Title="Contacts List">
+    <StackLayout Spacing="10">
+        <Frame Padding="0" CornerRadius="10" Margin="10,20,10,0">
+            <SearchBar Placeholder="Type Something Here ...." x:Name="SearchBar" TextChanged="SearchContact_TextChanged"/>
+        </Frame>
+        <ListView ItemsSource="{Binding Contacts}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Frame BackgroundColor="WhiteSmoke" Padding="10">
+                                <Grid BackgroundColor="Transparent">
+                                    <Label Grid.Column="0" HorizontalOptions="StartAndExpand" Text="{Binding Path=Name,StringFormat='Name: {0}'}" />
+                                    <Label Grid.Column="0" HorizontalOptions="EndAndExpand" Text="{Binding Path=PhoneNumber,StringFormat='PhoneNumber: {0}'}" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
