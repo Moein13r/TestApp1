@@ -14,6 +14,10 @@ namespace TestApp1.ViewModels
             Api = new ContactApi();
             Contacts = new List<Contact>() { new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" } };
         }
+        ~MainPageViewModel()
+        {
+            Dispose();
+        }
         private List<Contact> _Contacts;
         public List<Contact> Contacts
         {

@@ -25,7 +25,7 @@ namespace TestApp1.Api
             {
                 return null;
             }
-        }
+        }        
         public async Task<List<Contact>> GetAllContacts(CancellationToken tokenSource)
         {
             try

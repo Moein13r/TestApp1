@@ -17,6 +17,19 @@ namespace TestApp1.Views
             InitializeComponent();
             Vm = new MainPageViewModel();
             BindingContext = Vm;
+            
+        }
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (cts != null)
+            {
+                cts.Cancel();
+                ct = cts.Token;
+            }
+            cts = new System.Threading.CancellationTokenSource();
+            ct = cts.Token;
+            await Vm.GetContactsByName(SearchBar.Text, ct);
         }
         System.Threading.CancellationToken ct;
         System.Threading.CancellationTokenSource cts;
