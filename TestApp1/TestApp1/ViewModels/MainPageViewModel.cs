@@ -27,33 +27,20 @@ namespace TestApp1.ViewModels
                 OnPropertyChanged(nameof(Contacts));
             }
         }
-        System.Threading.CancellationToken ct;
-        System.Threading.CancellationTokenSource cts;
         private readonly ContactApi Api;
-        public async void GetContactsByName(string text)
+        public async Task GetContactsByName(string text, System.Threading.CancellationToken ct)
         {
-            if (cts != null)
+            try
             {
-                cts.Cancel();
-                ct = cts.Token;
-            }
-            cts = new System.Threading.CancellationTokenSource();
-            ct = cts.Token;
-            await Task.Run(async () =>
-            {
-                try
+                var items = await Api.GetContactsByName(text, ct);
+                if (items != null)
                 {
-                    var items = await Api.GetContactsByName(text, ct);
-                    if (items != null)
-                    {
-                        Contacts = items;
-                    }                    
-                }
-                catch (OperationCanceledException e)
-                {
+                    Contacts = items;
                 }
             }
-            , ct);
+            catch (OperationCanceledException e)
+            {
+            }
         }
     }
 }

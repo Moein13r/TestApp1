@@ -17,11 +17,8 @@ namespace TestApp1.Api
             try
             {
                 string uri = Url + $"GetContactsByname?name={name}";
-                string JsonContent = await Base.Get(uri);
-                if (JsonContent == null)
-                    return null;                    
+                string JsonContent = await Base.Get(uri,tokenSource);
                 List<Contact> items = DataConverter.JsonConverter<Contact[]>.JsonToObject(JsonContent).ToList();
-                tokenSource.ThrowIfCancellationRequested();
                 return items ?? new List<Contact>();
             }
             catch (Exception e)
@@ -34,11 +31,8 @@ namespace TestApp1.Api
             try
             {
                 string uri = Url + $"GetAllContacts";
-                string JsonContent = await Base.Get(uri);
-                if (JsonContent == null)
-                    return null;
-                List<Contact> items = DataConverter.JsonConverter<Contact[]>.JsonToObject(JsonContent).ToList();
-                tokenSource.ThrowIfCancellationRequested();
+                string JsonContent = await Base.Get(uri,tokenSource);                
+                List<Contact> items = DataConverter.JsonConverter<Contact[]>.JsonToObject(JsonContent).ToList();               
                 return items ?? new List<Contact>();
             }
             catch (Exception e)

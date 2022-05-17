@@ -18,10 +18,18 @@ namespace TestApp1.Views
             Vm = new MainPageViewModel();
             BindingContext = Vm;
         }
-
-        private void SearchContact_TextChanged(object sender, TextChangedEventArgs e)
+        System.Threading.CancellationToken ct;
+        System.Threading.CancellationTokenSource cts;
+        private async void SearchContact_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Vm.GetContactsByName(SearchBar.Text);
+            if (cts != null)
+            {
+                cts.Cancel();
+                ct = cts.Token;
+            }
+            cts = new System.Threading.CancellationTokenSource();
+            ct = cts.Token;
+            await Vm.GetContactsByName(SearchBar.Text,ct);
         }
     }
 }

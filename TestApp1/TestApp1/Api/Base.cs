@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TestApp1.Api
@@ -16,7 +17,7 @@ namespace TestApp1.Api
         /// Api Get Method
         /// </summary>
         /// <returns></returns>
-        public async Task<string> Get(string url)
+        public async Task<string> Get(string url,CancellationToken cancellationToken)
         {
             try
             {
@@ -24,7 +25,7 @@ namespace TestApp1.Api
                 HttpResponseMessage response = new HttpResponseMessage();
                 using (HttpClient api = new HttpClient())
                 {
-                    response = await api.GetAsync(url);
+                    response = await api.GetAsync(url, cancellationToken);
                 }
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -42,7 +43,7 @@ namespace TestApp1.Api
         /// <summary>
         /// Api Post Method
         /// </summary>
-        public bool Post()
+        public bool Post(CancellationToken cancellationToken)
         {
             HttpClient api = new HttpClient();
             return true;
