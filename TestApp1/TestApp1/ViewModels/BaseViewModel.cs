@@ -6,14 +6,10 @@ using System.Text;
 
 namespace TestApp1.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged,IDisposable
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void Dispose()
-        {
-            Dispose();
-        }
 
         protected void OnPropertyChanged([CallerMemberName] string name = "")
         {

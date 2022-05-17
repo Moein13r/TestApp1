@@ -21,9 +21,13 @@ namespace TestApp1.Api
                 List<Contact> items = DataConverter.JsonConverter<Contact[]>.JsonToObject(JsonContent).ToList();
                 return items ?? new List<Contact>();
             }
-            catch (Exception e)
+            catch(TaskCanceledException e)
             {
-                return null;
+                throw;
+            }
+            catch (Exception e1)
+            {
+                throw;
             }
         }        
         public async Task<List<Contact>> GetAllContacts(CancellationToken tokenSource)
@@ -35,9 +39,13 @@ namespace TestApp1.Api
                 List<Contact> items = DataConverter.JsonConverter<Contact[]>.JsonToObject(JsonContent).ToList();               
                 return items ?? new List<Contact>();
             }
+            catch (TaskCanceledException e1)
+            {
+                throw;
+            }
             catch (Exception e)
             {
-                return null;
+                throw;
             }
         }
     }

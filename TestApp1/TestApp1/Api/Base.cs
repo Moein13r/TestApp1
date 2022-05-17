@@ -17,7 +17,7 @@ namespace TestApp1.Api
         /// Api Get Method
         /// </summary>
         /// <returns></returns>
-        public async Task<string> Get(string url,CancellationToken cancellationToken)
+        public async Task<string> Get(string url, CancellationToken cancellationToken)
         {
             try
             {
@@ -35,9 +35,13 @@ namespace TestApp1.Api
                 }
                 else return null;
             }
+            catch (TaskCanceledException e1)
+            {
+                throw;
+            }
             catch (Exception e)
             {
-                return null;
+                throw;
             }
         }
         /// <summary>

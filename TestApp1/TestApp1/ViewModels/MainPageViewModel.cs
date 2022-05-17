@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp1.Api;
@@ -7,16 +8,31 @@ using TestApp1.Models;
 
 namespace TestApp1.ViewModels
 {
-    public class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel, IDisposable
     {
         public MainPageViewModel()
         {
             Api = new ContactApi();
             Contacts = new List<Contact>() { new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" }, new Contact { Name = "Test", PhoneNumber = "09332182965" } };
-        }
+        }   
         ~MainPageViewModel()
         {
-            Dispose();
+            Dispose(false);
+        }
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {            
+            if (!this.disposed)
+            {              
+                
+                disposed = true;
+            }
         }
         private List<Contact> _Contacts;
         public List<Contact> Contacts
@@ -43,6 +59,9 @@ namespace TestApp1.ViewModels
                 }
             }
             catch (OperationCanceledException e)
+            {
+            }
+            catch (Exception e)
             {
             }
         }

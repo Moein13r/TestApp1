@@ -16,8 +16,7 @@ namespace TestApp1.Views
         {
             InitializeComponent();
             Vm = new MainPageViewModel();
-            BindingContext = Vm;
-            
+            BindingContext = Vm;                  
         }
         protected async override void OnAppearing()
         {
