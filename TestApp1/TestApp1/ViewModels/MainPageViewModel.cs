@@ -17,7 +17,7 @@ namespace TestApp1.ViewModels
         }   
         ~MainPageViewModel()
         {
-            Dispose(false);
+            Dispose();
         }
         public void Dispose()
         {
